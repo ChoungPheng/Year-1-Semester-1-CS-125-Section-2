@@ -35,16 +35,16 @@ int main() { // main function
             gradeA++; // add 1 to grade
         }
         else if(stoi(score) >= 80) { //if score is bigger than or equal to 80
-            gradeB++;
+            gradeB++; // add 1 to grade
         }
         else if(stoi(score) >= 70) { //if score is bigger than or equal to 70
-            gradeC++;
+            gradeC++; // add 1 to grade
         } 
         else if(stoi(score) >= 60) { //if score is bigger than or equal to 60
-            gradeD++;
+            gradeD++; // add 1 to grade
         }
         else if(stoi(score) >= 0){ //if score is bigger than or equal to 0
-            gradeF++;
+            gradeF++; // add 1 to grade
         }
         else { // if score is negative then stop grading
             break; // stop while loop

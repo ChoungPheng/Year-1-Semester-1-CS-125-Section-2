@@ -28,7 +28,7 @@ int main() { // main function
 
         // grade the scores
         if(stoi(score) > 100) { //if score is bigger than 100
-            cout << "Value '" << score << "' is out of range."; // print error 
+            cout << "The value '" << score << "' is out of range."; // print error 
             return 0; // stops the program
         }
         else if(stoi(score) >= 90) { //if score is bigger than or equal to 90

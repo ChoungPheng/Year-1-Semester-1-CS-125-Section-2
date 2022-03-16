@@ -5,7 +5,7 @@
 
 using namespace std; // use standard name space
 
-int main() { // main func ztion
+int main() { // main function
     int num; // define number variable
     bool isPrime = true; // define isPrime variable and set it to True
     
@@ -18,6 +18,7 @@ int main() { // main func ztion
 
     if(num == 0|| num == 1) { // if number is 0 or 1
         cout << "Number " << num << " is not a prime nor composite number."; // print message 
+        isPrime = false;
     }
 
     for(int i=2; i<=num/2; i++) { // start of 'for loop'

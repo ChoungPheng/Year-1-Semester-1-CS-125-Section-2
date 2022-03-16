@@ -2,7 +2,6 @@
 //Written by Ear Choung Pheng
 
 #include <iostream> //To include inputs and outputs
-#include <string.h> // Include so we can use string
 
 using namespace std; // use standard name space
 

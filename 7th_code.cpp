@@ -26,7 +26,7 @@ int main() { // main function
             break; // stop while loop
         }
 
-        // 
+        // grade the scores
         if(stoi(score) > 100) { //if score is bigger than 100
             cout << "Value '" << score << "' is out of range."; // print error 
             return 0; // stops the program

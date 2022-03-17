@@ -9,12 +9,14 @@ using namespace std; // use standard name space
 
 int main() { // main function
 
-    string givenList, score; // define variables
+    // define variables
+    string givenList, score; 
+    int gradeA = 0, gradeB = 0, gradeC = 0, gradeD = 0, gradeF = 0;
+    float totalScores = 0;
+
     cout << "Enter your scores: "; // get input from user
     getline(cin, givenList); // save input from user to 'givenList'
     stringstream scoresList(givenList); // turning 'givenList' into stringsteam
-
-    int gradeA = 0, gradeB = 0, gradeC = 0, gradeD = 0, gradeF = 0;
 
     while(getline(scoresList, score, ' ')) { // while loop if we can getline from scoresList
 
@@ -28,22 +30,27 @@ int main() { // main function
 
         // grade the scores
         if(stoi(score) > 100) { //if score is bigger than 100
-            cout << "The value '" << score << "' is out of range."; // print error 
-            return 0; // stops the program
+            cout << "The value '" << score << "' is out of range." << endl; // print error 
+            break; // stop while loop
         }
         else if(stoi(score) >= 90) { //if score is bigger than or equal to 90
+            totalScores += stoi(score);
             gradeA++; // add 1 to grade
         }
         else if(stoi(score) >= 80) { //if score is bigger than or equal to 80
+            totalScores += stoi(score);
             gradeB++; // add 1 to grade
         }
         else if(stoi(score) >= 70) { //if score is bigger than or equal to 70
+            totalScores += stoi(score);
             gradeC++; // add 1 to grade
         } 
         else if(stoi(score) >= 60) { //if score is bigger than or equal to 60
+            totalScores += stoi(score);
             gradeD++; // add 1 to grade
         }
         else if(stoi(score) >= 0){ //if score is bigger than or equal to 0
+            totalScores += stoi(score);
             gradeF++; // add 1 to grade
         }
         else { // if score is negative then stop grading
@@ -57,6 +64,7 @@ int main() { // main function
     cout << "Number of C's " << gradeC << endl;
     cout << "Number of D's " << gradeD << endl;
     cout << "Number of F's " << gradeF << endl;
+    cout << "The total number of scores are: " << gradeA + gradeB + gradeC + gradeD + gradeF << endl;
 
     return 0; // stops the program
 }

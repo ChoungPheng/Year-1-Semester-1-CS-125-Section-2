@@ -18,8 +18,7 @@ int main() { // main function
         if(cin) { // if cin successful
             // grade the scores
             if(score > 100) { //if score is bigger than 100
-                cout << "The value '" << score << "' is out of range." << endl; // print error 
-                break; // stop while loop
+                cout << "The value '" << score << "' is out of range." << endl; // print error
             }
             else if(score >= 90) { //if score is bigger than or equal to 90
                 totalScores += score;

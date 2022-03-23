@@ -4,6 +4,7 @@
         "cmath": "cpp",
         "ostream": "cpp",
         "istream": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "initializer_list": "cpp"
     }
 }

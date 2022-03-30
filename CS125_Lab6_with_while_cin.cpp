@@ -1,3 +1,6 @@
+//Write this program to accept read a list of exam scores (ranging from 0 to 100) and display the total number of grades
+//Written by Ear Choung Pheng
+
 #include <iostream> //To include inputs and outputs
 #include <string> // Include so we can use string
 #include <sstream> // Include so we can use stringstream

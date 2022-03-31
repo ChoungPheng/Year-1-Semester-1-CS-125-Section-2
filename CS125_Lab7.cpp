@@ -18,7 +18,7 @@ bool isNumber(const string& string){
 }
 
 void displayMenu() {
-    cout << endl  << "================================================================================" << endl;
+    cout << "================================================================================" << endl;
     cout << "MAIN MENU: Select Laboratory Activity" << endl;
     cout << "       [1] On Arithmetic Operators and Keyboard Input" << endl;
     cout << "       [2] On Arithmetic Operators" << endl;
@@ -406,8 +406,6 @@ void DayOfTheWeek() {
             break;
     }
     cout << endl;
-    sleep(1.2);
-    displayMenu();
 }
 void EvenOrOdd() {
     cout << "==================" << endl;
@@ -434,8 +432,6 @@ void EvenOrOdd() {
     }
 
     cout << endl;
-    sleep(1.2);
-    displayMenu();
 }
 
 void ActivitySeven() {
@@ -461,6 +457,8 @@ void ActivitySeven() {
         case 'B':
             break;
     }
+    sleep(1.2);
+    displayMenu();
 }
 
 int main() { // main function

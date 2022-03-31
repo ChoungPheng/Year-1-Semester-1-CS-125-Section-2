@@ -3,13 +3,22 @@
 
 #include <iostream> //To include inputs and outputs
 #include <unistd.h>
+#include <string.h>
+#include <sstream>
 
 using namespace std; // use standard name space
 
 bool exitProgram = false;
 
+bool isNumber(const string& string){
+    for(char const &c : string) {
+        if(!isdigit(c)) return false;
+    }
+    return true;
+}
+
 void displayMenu() {
-    cout << "================================================================================" << endl;
+    cout << endl  << "================================================================================" << endl;
     cout << "MAIN MENU: Select Laboratory Activity" << endl;
     cout << "       [1] On Arithmetic Operators and Keyboard Input" << endl;
     cout << "       [2] On Arithmetic Operators" << endl;
@@ -26,41 +35,66 @@ void ActivityOne() {
     cout << "On Arithmetic Operators and Keyboard Input:" << endl;
     cout << "===========================================" << endl;
     //Define the variables
-    float x,y,z;
+    string num1,num2,num3;
+    int x,y,z;
     //Take Inputs from User and save to the variables
     while(true) {
         cout << "Enter First Number: ";
-        if(cin>>x) {
+        getline(cin, num1);
+        bool valid = false;
+
+        try {
+            
+
+            int x = stoi(num1);
+
+            if(to_string(x).length() == num1.length()) {
+                valid = true;
+            }
+            else {
+                valid = false;
+            }
+        }
+        catch(...) {
+            valid = false;
+        }
+
+        if(valid) {
+            stringstream ss;
+            ss << num1;
+            ss >> x;
             break;
         }
         else {
             cout << "Invalid input! Please enter a number!" << endl;
-            cin.clear();
-            cin.ignore(80, '\n');
             continue;
         }
     }
     while(true) {
         cout << "Enter Second Number: ";
-        if(cin>>y) {
+        getline(cin, num2);
+        if(isNumber(num2)) {
+            stringstream ss;
+            ss << num2;
+            ss >> y;
             break;
         }
         else {
             cout << "Invalid input! Please enter a number!" << endl;
-            cin.clear();
-            cin.ignore(80, '\n');
             continue;
         }
     }
     while(true) {
         cout << "Enter Third Number: ";
-        if(cin>>z) {
+        getline(cin, num3);
+        if(isNumber(num3)) {
+            stringstream ss;
+            ss << num3;
+            ss >> z;
             break;
         }
         else {
             cout << "Invalid input! Please enter a number!" << endl;
-            cin.clear();
-            cin.ignore(80, '\n');
             continue;
         }
     }
@@ -70,6 +104,7 @@ void ActivityOne() {
     cout << "The average of " << x << "," << y << "," << z << " is " << (x+y+z)/3 << ".\n";
     cout << "The product of " << x << "," << y << "," << z << " is " << x*y*z << ".\n";
     sleep(1.2);
+    displayMenu();
 }
 
 void RadiusProgram() {
@@ -81,10 +116,10 @@ void RadiusProgram() {
 
     cout << "Enter radius: "; // Get input from user
     cin >> radius; // Save input from user to 'radius'
+    cin.ignore(100, '\n');
 
     cout << "The area of the circle is: " << PI * radius*radius << endl; // Print area of the circle
     cout << "The circumference of the circle is: " << 2 * PI * radius << endl; // Print circumference of the circle
-    sleep(1.2);
 }
 void TemperatureProgram() {
     cout << "======================" << endl;
@@ -92,35 +127,72 @@ void TemperatureProgram() {
     cout << "======================" << endl;
     float celsius; // Define celsius variable
 
-    cout << "Enter degree in Celsius: "; // Get input from user
-    cin >> celsius; // Save input to 'celsius'
-
-    cout << "The value of " << celsius << " degrees C in K is: " << celsius + 273.15 << endl; // Print result of C to K
-    cout << "The value of " << celsius << " degrees C in F is: " << celsius*1.8 + 32 << endl;
-    sleep(1.2);
+    while(true) {
+        cout << "Enter degree in Celsius: "; // Get input from user
+        if(cin >> celsius) {
+            cout << "The value of " << celsius << " degrees C in K is: " << celsius + 273.15 << endl; // Print result of C to K
+            cout << "The value of " << celsius << " degrees C in F is: " << celsius*1.8 + 32 << endl;
+            break;
+        }
+        else {
+            cin.clear();
+            cin.ignore(80, '\n');
+            cout << "Invalid Input!" << endl;
+        }
+    }
+    cin.ignore(100, '\n');
 }
 
 void ActivityTwo() {
-    char choice;
     cout << "=================================" << endl;
     cout << "SELECT PROGRAMS:" << endl;
     cout << "       [1] Circumference and Area" << endl;
     cout << "       [2] Temperature Conversion" << endl;
     cout << "       [B] Go Back" << endl;
-    cout << "Your Choice: ";
-    cin >> choice;
 
-    switch(choice){
-        case '1':
-            RadiusProgram();
+    bool hasError = false;
+    
+    while(true) {
+        string choiceString;
+        char choice;
+
+        cout << "Your Choice: ";
+        getline(cin, choiceString);
+
+        if(choiceString.size() < 2 && choiceString.size() > 0){
+
+            choice = choiceString[0];
+            switch(choice){
+                case '1':
+                    RadiusProgram();
+                    break;
+                case '2':
+                    TemperatureProgram();
+                    break;
+                case 'b':
+                    break;
+                case 'B':
+                    break;
+                default: 
+                    hasError = true;
+                    break;
+            }
+        }
+        else {
+            hasError = true;
+        }
+
+        if(hasError) {
+            cout << "Please input a valid option." << endl;
+            hasError = false;
+            continue;
+        }
+        else {
+            hasError = false;
+            sleep(1);
+            displayMenu();
             break;
-        case '2':
-            TemperatureProgram();
-            break;
-        case 'b':
-            break;
-        case 'B':
-            break;
+        }
     }
 }
 
@@ -132,12 +204,12 @@ void ActivityThree() {
     char name[MAX_NAME]; //define name variable with max length of 50 letters
     int age; // define age variable
 
-    cin.ignore(); //! to ignore '/n' from '>>' while using 'cin' so 'getline' does not take '/n' as it's input
     cout << "Enter your name: "; // get input from user
     cin.getline(name, MAX_NAME); // save user input to 'name'
 
     cout << "Enter your age: "; // get input from user
     cin >> age; // save user input to 'age'
+    cin.ignore(100, '\n');
 
     if(age % 2) { // age % 2 == 1 which mean 'age' is an odd number
         int count = 0; // define count = 0 so we can count
@@ -154,6 +226,7 @@ void ActivityThree() {
         }
     }
     sleep(1.2);
+    displayMenu();
 }
 
 void ActivityFour() {
@@ -164,6 +237,7 @@ void ActivityFour() {
 
     cout << "Enter temperature: "; // get input from user
     cin >> temp; // save user input to 'temp'
+    cin.ignore(100, '\n');
 
     if(!cin) { // check if cin failed to get interger from user
         cout << "Input invalid!" << endl; // print error
@@ -189,6 +263,7 @@ void ActivityFour() {
         }
     }
     sleep(1.2);
+    displayMenu();
 }
 
 void ActivityFive() {
@@ -200,6 +275,7 @@ void ActivityFive() {
     
     cout << "Enter a positive number: "; // get input from user
     cin >> num; // save user input to 'num'
+    cin.ignore(100, '\n');
 
     if(!cin) { // check if cin failed to get an interger from user
         cout << "Invalid input!" << endl; // print error
@@ -229,6 +305,7 @@ void ActivityFive() {
     }
     cout << endl;
     sleep(1.2);
+    displayMenu();
 }
 
 void ActivitySix() {
@@ -286,7 +363,9 @@ void ActivitySix() {
     cout << "Number of F's " << gradeF << endl;
     // print total number of scores
     cout << "The total number of scores are: " << gradeA + gradeB + gradeC + gradeD + gradeF << endl;
+    cin.ignore(100, '\n');
     sleep(1.2);
+    displayMenu();
 }
 
 void DayOfTheWeek() {
@@ -297,6 +376,7 @@ void DayOfTheWeek() {
     /* Input day number from user */
     cout << "Enter number: ";
     cin >> day;
+    cin.ignore(100, '\n');
 
     switch(day)
     {
@@ -321,9 +401,13 @@ void DayOfTheWeek() {
         case 7: 
             cout << "It's Sunday!";
             break;
+        default:
+            cout << "Invalid Input!";
+            break;
     }
     cout << endl;
     sleep(1.2);
+    displayMenu();
 }
 void EvenOrOdd() {
     cout << "==================" << endl;
@@ -334,6 +418,7 @@ void EvenOrOdd() {
 
     cout << "Enter number: ";
     cin >> num;
+    cin.ignore(100, '\n');
 
     switch(num % 2)
     {
@@ -350,6 +435,7 @@ void EvenOrOdd() {
 
     cout << endl;
     sleep(1.2);
+    displayMenu();
 }
 
 void ActivitySeven() {
@@ -361,6 +447,7 @@ void ActivitySeven() {
     cout << "       [B] Go Back" << endl;
     cout << "Your Choice: ";
     cin >> choice;
+    cin.ignore(100, '\n');
 
     switch(choice){
         case '1':
@@ -377,46 +464,55 @@ void ActivitySeven() {
 }
 
 int main() { // main function
+    displayMenu();
     while (!exitProgram) {
+        string choiceString;
         char choice;
 
-        displayMenu();
-
         cout << "Your Choice: ";
-        cin >> choice;
+        getline(cin, choiceString);
 
-        switch(choice){
-            case '1':
-                ActivityOne();
-                break;
-            case '2':
-                ActivityTwo();
-                break;
-            case '3':
-                ActivityThree();
-                break;
-            case '4':
-                ActivityFour();
-                break;
-            case '5':
-                ActivityFive();
-                break;
-            case '6':
-                ActivitySix();
-                break;
-            case '7':
-                ActivitySeven();
-                break;
-            case 'x':
-                cout << "Exiting Program...";
-                exitProgram = true;
-                break;
-            case 'X':
-                cout << "Exiting Program...";
-                exitProgram = true;
-                break;
-            default:
-                break;
+        if(choiceString.size() < 2 && choiceString.size() > 0){
+
+            choice = choiceString[0];
+
+            switch(choice){
+                case '1':
+                    ActivityOne();
+                    break;
+                case '2':
+                    ActivityTwo();
+                    break;
+                case '3':
+                    ActivityThree();
+                    break;
+                case '4':
+                    ActivityFour();
+                    break;
+                case '5':
+                    ActivityFive();
+                    break;
+                case '6':
+                    ActivitySix();
+                    break;
+                case '7':
+                    ActivitySeven();
+                    break;
+                case 'x':
+                    cout << "Exiting Program...";
+                    exitProgram = true;
+                    break;
+                case 'X':
+                    cout << "Exiting Program...";
+                    exitProgram = true;
+                    break;
+                default:
+                    cout << "Please input a valid option." << endl;
+                    break;
+            }
+        }
+        else {
+            cout << "Please input a valid option." << endl;
         }
     }
 

@@ -1,10 +1,11 @@
-//Write this program to accept read a list of exam scores (ranging from 0 to 100) and display the total number of grades
+//Write this program to show a menu of laboratory activitis
 //Written by Ear Choung Pheng
 
 #include <iostream> //To include inputs and outputs
 #include <unistd.h>
 #include <string.h>
 #include <sstream>
+#include <header/header.h>
 
 using namespace std; // use standard name space
 
@@ -44,9 +45,7 @@ void ActivityOne() {
         bool valid = false;
 
         try {
-            
-
-            int x = stoi(num1);
+            x = stoi(num1);
 
             if(to_string(x).length() == num1.length()) {
                 valid = true;
@@ -60,9 +59,7 @@ void ActivityOne() {
         }
 
         if(valid) {
-            stringstream ss;
-            ss << num1;
-            ss >> x;
+            x = stoi(num1);
             break;
         }
         else {
@@ -103,7 +100,7 @@ void ActivityOne() {
     cout << "The sum of " << x << "," << y << "," << z << " is " << x+y+z << ".\n";
     cout << "The average of " << x << "," << y << "," << z << " is " << (x+y+z)/3 << ".\n";
     cout << "The product of " << x << "," << y << "," << z << " is " << x*y*z << ".\n";
-    sleep(1.2);
+    system("pause");
     displayMenu();
 }
 
@@ -144,17 +141,18 @@ void TemperatureProgram() {
 }
 
 void ActivityTwo() {
-    cout << "=================================" << endl;
-    cout << "SELECT PROGRAMS:" << endl;
-    cout << "       [1] Circumference and Area" << endl;
-    cout << "       [2] Temperature Conversion" << endl;
-    cout << "       [B] Go Back" << endl;
-
+    bool exitSub = false;
     bool hasError = false;
     
-    while(true) {
+    while(!exitSub) {
         string choiceString;
         char choice;
+
+        cout << "=================================" << endl;
+        cout << "SELECT PROGRAMS:" << endl;
+        cout << "       [1] Circumference and Area" << endl;
+        cout << "       [2] Temperature Conversion" << endl;
+        cout << "       [B] Go Back" << endl;
 
         cout << "Your Choice: ";
         getline(cin, choiceString);
@@ -165,17 +163,22 @@ void ActivityTwo() {
             switch(choice){
                 case '1':
                     RadiusProgram();
+                    system("pause");
                     break;
                 case '2':
                     TemperatureProgram();
+                    system("pause");
                     break;
                 case 'b':
+                    displayMenu();
+                    exitSub = true;
                     break;
                 case 'B':
+                    displayMenu();
+                    exitSub = true;
                     break;
                 default: 
                     hasError = true;
-                    break;
             }
         }
         else {
@@ -187,11 +190,9 @@ void ActivityTwo() {
             hasError = false;
             continue;
         }
-        else {
+        else if(exitSub){
             hasError = false;
-            sleep(1);
-            displayMenu();
-            break;
+            system("pause");
         }
     }
 }
@@ -225,7 +226,7 @@ void ActivityThree() {
             count++; // add 1 to 'count'
         }
     }
-    sleep(1.2);
+    system("pause");
     displayMenu();
 }
 
@@ -262,7 +263,7 @@ void ActivityFour() {
             cout << "Value out of range!" << endl; // print message
         }
     }
-    sleep(1.2);
+    system("pause");
     displayMenu();
 }
 
@@ -304,7 +305,7 @@ void ActivityFive() {
         cout << "Number " << num << " is a prime number."; // print message 
     }
     cout << endl;
-    sleep(1.2);
+    system("pause");
     displayMenu();
 }
 
@@ -355,7 +356,7 @@ void ActivitySix() {
         }
     }
     
-    //print the number of grades
+    //print the number of gradess
     cout << "Number of A's " << gradeA << endl;
     cout << "Number of B's " << gradeB << endl;
     cout << "Number of C's " << gradeC << endl;
@@ -364,7 +365,7 @@ void ActivitySix() {
     // print total number of scores
     cout << "The total number of scores are: " << gradeA + gradeB + gradeC + gradeD + gradeF << endl;
     cin.ignore(100, '\n');
-    sleep(1.2);
+    system("pause");
     displayMenu();
 }
 
@@ -457,7 +458,7 @@ void ActivitySeven() {
         case 'B':
             break;
     }
-    sleep(1.2);
+    system("pause");
     displayMenu();
 }
 

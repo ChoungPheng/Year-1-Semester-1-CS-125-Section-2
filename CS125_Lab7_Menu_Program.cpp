@@ -1,11 +1,11 @@
-//Write this program to show a menu of laboratory activitis
+//Write this program to show a menu of laboratory activities
 //Written by Ear Choung Pheng
 
 #include <iostream> //To include inputs and outputs
 #include <unistd.h>
 #include <string.h>
 #include <sstream>
-#include <header/header.h>
+#include <algorithm> 
 
 using namespace std; // use standard name space
 
@@ -28,6 +28,7 @@ void displayMenu() {
     cout << "       [5] On Prime and Composite Numbers" << endl;
     cout << "       [6] On Grading a List of Scores" << endl;
     cout << "       [7] On Switch" << endl;
+    cout << "       [8] Sort Array from Highest to Lowest and Display the Average of all values" << endl;
     cout << "       [X] Exit" << endl;
 }
 
@@ -192,7 +193,6 @@ void ActivityTwo() {
         }
         else if(exitSub){
             hasError = false;
-            system("pause");
         }
     }
 }
@@ -462,6 +462,72 @@ void ActivitySeven() {
     displayMenu();
 }
 
+void ActivityEight() {
+    //! Declare variables
+    float tempList[100];
+    int size = 0;
+    bool valid = false;
+
+    //! Accept list of numbers from user
+    while(!valid) {
+        cout << "Enter your list of numbers: ";
+
+        for(int i=0;i<100;i++) {
+            float tempNumber; //? declare a temporary variable
+
+            cin >> tempNumber;
+            if(!cin) { //? check if it is a letter/symbol
+                cout << "Invalid Input.\n";
+                size = 0;
+                cin.clear();
+                cin.ignore(100, '\n');
+                break;
+            }
+            else if(tempNumber < -1){ //? check if number is negative
+                cout << "Please number of positive number.\n";
+                size = 0;
+                break;
+            }
+            else if(tempNumber >= 0) { //? Adding numbers to temporary list
+                tempList[i] = tempNumber;
+                size += 1; //? calculating the size of the entered list
+            }
+            else { //? Detecting sentinel value "-1"
+                valid = true;
+                break;
+            }
+        }
+    }
+
+    float *list = new float[size]; //? Create new array with new list size
+
+    // !Sort List from Highest to Lowest
+    cout << "Highest to Lowest: "; 
+
+    for(int i=0;i<size;i++) {
+        list[i] = tempList[i]; //? add numbers to new list
+    }
+
+    sort(list, list + size, greater<float>()); //? Sort the list
+
+    for(int i=0;i<size;i++) {
+        cout << list[i] << " "; //? Display the numbers from the sorted list
+    }
+    
+    //! Display the average of all the values
+    cout << "\nAverage: ";
+
+    float sum = 0; //? new variable for sum of all values
+
+    for(int i=0;i<size;i++) {
+        sum += list[i]; //? calculating the sum
+    }
+    cout << sum/size << endl; //? Display the sum
+
+    system("pause");
+    displayMenu();
+}
+
 int main() { // main function
     displayMenu();
     while (!exitProgram) {
@@ -496,6 +562,9 @@ int main() { // main function
                     break;
                 case '7':
                     ActivitySeven();
+                    break;
+                case '8':
+                    ActivityEight();
                     break;
                 case 'x':
                     cout << "Exiting Program...";

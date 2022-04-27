@@ -28,7 +28,7 @@ void displayMenu() {
     cout << "       [5] On Prime and Composite Numbers" << endl;
     cout << "       [6] On Grading a List of Scores" << endl;
     cout << "       [7] On Switch" << endl;
-    cout << "       [8] Sort Array from Highest to Lowest and Display the Average of all values" << endl;
+    cout << "       [8] Display Highest, Lowest, and the Average of the numbers in the list" << endl;
     cout << "       [X] Exit" << endl;
 }
 
@@ -129,7 +129,7 @@ void TemperatureProgram() {
         cout << "Enter degree in Celsius: "; // Get input from user
         if(cin >> celsius) {
             cout << "The value of " << celsius << " degrees C in K is: " << celsius + 273.15 << endl; // Print result of C to K
-            cout << "The value of " << celsius << " degrees C in F is: " << celsius*1.8 + 32 << endl;
+            cout << "The value of " << celsius << " degrees C in F is: " << celsius*1.8 + 32 << endl; 
             break;
         }
         else {
@@ -501,29 +501,27 @@ void ActivityEight() {
 
     float *list = new float[size]; //? Create new array with new list size
 
-    // !Sort List from Highest to Lowest
-    cout << "Highest to Lowest: "; 
-
     for(int i=0;i<size;i++) {
         list[i] = tempList[i]; //? add numbers to new list
-    }
+    }   
 
-    sort(list, list + size, greater<float>()); //? Sort the list
+    sort(list, list + size, less<float>()); //? Sort the list
 
-    for(int i=0;i<size;i++) {
-        cout << list[i] << " "; //? Display the numbers from the sorted list
-    }
-    
+    //! Display Highest Number
+    cout << "Highest Number is: " << list[size-1] << endl;
+
+    //! Display Lowest Number
+    cout << "Highest Number is: " << list[0] << endl;
+
     //! Display the average of all the values
-    cout << "\nAverage: ";
 
     float sum = 0; //? new variable for sum of all values
 
     for(int i=0;i<size;i++) {
         sum += list[i]; //? calculating the sum
     }
-    cout << sum/size << endl; //? Display the sum
-
+    cout << "Average: " << sum/size << endl; //? Display the sum
+    cin.ignore(100, '\n');
     system("pause");
     displayMenu();
 }

@@ -105,19 +105,28 @@ void ActivityOne() {
     displayMenu();
 }
 
+float FindArea(float _radius) {
+    #define PI 3.14159 // Define PI
+    return PI * _radius * _radius;
+}
+
+float FindCircumference(float _radius) {
+    #define PI 3.14159 // Define PI
+    return 2 * PI * _radius;
+}
+
 void RadiusProgram() {
     cout << "======================" << endl;
     cout << "Circumference and Area" << endl;
     cout << "======================" << endl;
-    #define PI 3.14159 // Define PI
     float radius; // Define radius variable
 
     cout << "Enter radius: "; // Get input from user
     cin >> radius; // Save input from user to 'radius'
     cin.ignore(100, '\n');
 
-    cout << "The area of the circle is: " << PI * radius*radius << endl; // Print area of the circle
-    cout << "The circumference of the circle is: " << 2 * PI * radius << endl; // Print circumference of the circle
+    cout << "The area of the circle is: " << FindArea(radius) << endl; // Print area of the circle
+    cout << "The circumference of the circle is: " << FindCircumference(radius) << endl; // Print circumference of the circle
 }
 void TemperatureProgram() {
     cout << "======================" << endl;

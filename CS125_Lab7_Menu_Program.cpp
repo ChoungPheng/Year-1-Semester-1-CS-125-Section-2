@@ -511,7 +511,7 @@ void ActivityEight() {
     cout << "Highest Number is: " << list[size-1] << endl;
 
     //! Display Lowest Number
-    cout << "Highest Number is: " << list[0] << endl;
+    cout << "Lowest Number is: " << list[0] << endl;
 
     //! Display the average of all the values
 

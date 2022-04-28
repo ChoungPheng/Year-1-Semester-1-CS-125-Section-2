@@ -44,13 +44,13 @@ int main() {
     }
 
     float *list = new float[size]; //? Create new array with new list size
-
-    // !Sort List from Highest to Lowest
-    cout << "Highest to Lowest: "; 
-
+    
     for(int i=0;i<size;i++) {
         list[i] = tempList[i]; //? add numbers to new list
     }
+
+    // !Sort List from Highest to Lowest
+    cout << "Highest to Lowest: "; 
 
     sort(list, list + size, greater<float>()); //? Sort the list
 

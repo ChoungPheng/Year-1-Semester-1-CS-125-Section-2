@@ -74,10 +74,11 @@ void AddScoresToUser(int scores) {
 
 void GuessTheCorrectNumber() {
     cout << "====================================\n";
-    cout << "Guess the number ranging from 1 to 10.\n";
+    cout << "Guess the correct number ranging from 1 to 10.\n";
 
     srand((unsigned int)time(NULL)); //? Add seed to random
     int correctNumber = rand() % 10 + 1;
+    
     bool hasWon = false;
     int chances = 5;
     while(!hasWon) {
@@ -367,10 +368,10 @@ int main() {
                 //! Getting the current user info from current user file
                 string currentUserInfo[2];
                 string line;
-                int count = -1;
+                int count = 0;
                 while(getline(user, line)) { //? Storing the user info to an Array
-                    count += 1;
                     currentUserInfo[count] = line;
+                    count++;
                 }
                 cout << "====================================\n";
                 cout << "Welcome, " << currentUserInfo[0] << " (Scores: " << currentUserInfo[1] <<")" << endl;
